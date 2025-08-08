@@ -13,43 +13,27 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-facebook-pixel`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        pixelId: "2072447129733768"
-      }
-    },
-    {
-      resolve: `gatsby-plugin-favicon`,
-      options: {
-        logo: "./src/images/logo.png",
-        injectHTML: true,
-        icons: {
-          android: true,
-          appleIcon: true,
-          appleStartup: true,
-          coast: false,
-          favicons: true,
-          firefox: true,
-          twitter: false,
-          yandex: false,
-          windows: false
-        }
-      }
-    },
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [`open sans\:300,400,600,700,800`, `alegreya`]
-      }
-    },
-    {
-      resolve: `gatsby-plugin-react-svg`,
-      options: {
-        include: `${__dirname}/src/images`
+        name: "Acclimate Consulting",
+        short_name: "Acclimate",
+        start_url: "/",
+        background_color: "#ffffff",
+        theme_color: "#000000",
+        display: "minimal-ui",
+        icon: "./src/images/logo.png",
       }
     },
     {
       resolve: `gatsby-plugin-sitemap`
+    },
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /\.svg$/
+        }
+      }
     },
     `gatsby-plugin-styled-components`,
     {
@@ -60,20 +44,37 @@ module.exports = {
       }
     },
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        // plugins: []
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-responsive-iframe`,
+          `gatsby-remark-smartypants`,
+        ]
       }
     },
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: `UA-120924365-1`
+        trackingIds: [
+          "UA-120924365-1", // Google Analytics / GA
+        ],
+        pluginConfig: {
+          head: false,
+          respectDNT: true,
+        },
       }
     },
-    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`
   ]
 };

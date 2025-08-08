@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 import styled from "styled-components";
 import { lighten } from "polished";
 import { colors } from "../../styles/theme";
@@ -44,7 +44,7 @@ const Right = styled.div`
     font-size: 10pt;
   }
   a {
-    color: ${colors.white}
+    color: ${colors.white};
     text-decoration: none;
   }
 `;
@@ -67,17 +67,6 @@ const LogoLink = styled(Link)`
     #a3 {
       fill: ${colors.primary};
     }
-  }
-`;
-
-const Insights = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  position: relative;
-  transition: all 0.1s ease;
-  &:hover {
-    background: ${lighten(0.05, colors.dark)};
   }
 `;
 
@@ -145,6 +134,7 @@ const SLink = styled(Link)`
   padding-left: 10px;
   border-top: 1px solid ${lighten(0.05, colors.dark)};
   font-size: 10pt;
+  color: ${colors.white};
   @media (max-width: 500px) {
     font-size: 8pt;
   }
@@ -214,9 +204,6 @@ export default class Navigation extends React.Component {
                 <SLink to="/contact">Contact</SLink>
               </Drop>
             </DropItem>
-            <Insights>
-              <Link to="/insights">Insights</Link>
-            </Insights>
           </Right>
         </Nav>
       </Wrapper>

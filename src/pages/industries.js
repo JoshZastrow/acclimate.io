@@ -14,7 +14,7 @@ import RetailSVG from "../images/retail.svg";
 import LogisticsSVG from "../images/logistics.svg";
 import HealthcareSVG from "../images/healthcare.svg";
 
-const HorizontalAccentLeft = HorizontalAccent.extend`
+const HorizontalAccentLeft = styled(HorizontalAccent)`
   margin: 20px 0;
 `;
 

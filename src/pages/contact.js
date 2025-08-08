@@ -1,5 +1,5 @@
 import React from "react";
-import { navigateTo } from "gatsby-link";
+import { navigate } from "gatsby";
 import styled from "styled-components";
 
 import { colors } from "../styles/theme";
@@ -9,10 +9,32 @@ import CallToActionLink from "../components/CallToActionButton";
 
 import ContactSVG from "../images/contact.svg";
 
-const CallToActionButton = CallToActionLink.withComponent("button").extend`
+const CallToActionButton = styled.button`
+  text-decoration: none;
+  margin: 0;
+  border: none;
+  color: white;
+  font-size: 16px;
+  background: #1B365D;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
   width: 200px;
   justify-self: end;
-  margin: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:after {
+    content: "\u2192";
+    display: inline-block;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    background: #2B4A6D;
+  }
+  &:hover:after {
+    transform: scaleY(1.5);
+  }
 `;
 
 const H1 = styled.h1`
@@ -90,7 +112,7 @@ export default class ContactForm extends React.Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", ...this.state })
     })
-      .then(() => navigateTo("/thanks"))
+      .then(() => navigate("/thanks"))
       .catch(error => alert(error));
 
     e.preventDefault();

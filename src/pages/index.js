@@ -1,6 +1,6 @@
 import React from "react";
-import Helmet from "react-helmet";
-import Link from "gatsby-link";
+import { Helmet } from "react-helmet";
+import { Link, graphql } from "gatsby";
 import styled from "styled-components";
 
 import { lighten, darken } from "polished";
@@ -20,7 +20,7 @@ import RetailSVG from "../images/retail.svg";
 import LogisticsSVG from "../images/logistics.svg";
 import HealthcareSVG from "../images/healthcare.svg";
 
-const LearnMoreButton = CallToActionButton.extend`
+const LearnMoreButton = styled(CallToActionButton)`
   background: ${colors.primary};
   &:hover {
     background: ${lighten(0.04, colors.primary)};
@@ -190,44 +190,35 @@ export default ({ data }) => (
     <Top>
       <div>
         <h1>
-          Make <span>intelligent</span> decisions
+          Build <span>intelligent</span> AI systems
         </h1>
         <h3>
-          Acclimate is a consulting firm that puts organizations back in control
-          with data-driven strategies and full-stack applications
+          Acclimate is an applied AI engineering firm specializing in agents, RAG systems, and LLMs using industry best practices
         </h3>
         <CallToActionButton to="/contact">Get in touch</CallToActionButton>
       </div>
     </Top>
     <SectionWrapper backgroundColor={colors.white} fontColor={colors.dark}>
       <WhySection>
-        <h1>Why partner with Acclimate?</h1>
+        <h1>Why partner with us?</h1>
         <HorizontalAccent />
         <div>
           <div>
-            <h4>Craft and implement your strategic vision</h4>
+            <h4>Accelerate your AI Roadmap</h4>
             <p>
-              Our focus is to help you scale up the performance of your
-              organization. We leverage our experience in business strategy and
-              data science so you can avoid costly mistakes and make
-              transformative decisions.
+              Your company is a leader, but building and scaling advanced AI systems is complex. The talent is scarce, and a slow implementation is costly. We are your fractional, on-demand AI systems team, bringing the strategic leadership and reusable components to get you to market faster and de-risk your entire AI roadmap.
             </p>
           </div>
           <div>
-            <h4>Delight your customers with new offerings</h4>
+            <h4>Go from Greenfield Opportunity to Production-Grade System</h4>
             <p>
-              We know technology moves fast. Liberate yourself from entrenched
-              business models and old ideas. Adopt fresh thinking to create
-              unprecedented value and improve your bottom line.
+              Don't spend months searching for a single high-cost hire. We build, deploy, and empower your team with a suite of pre-built, battle-tested components for orchestration, data ingestion, and agent tooling. We turn your "zero to one" problem into a straightforward integration project, delivering a production-ready MVP in weeks, not quarters.
             </p>
           </div>
           <div>
-            <h4>Equip your business for the new frontier</h4>
+            <h4>Empower your team for long-term success</h4>
             <p>
-              Our vision is to bring every customer-centric company into the
-              future. Leverage our team to multiply the capabilities of every
-              facet of your organization with advanced analytics and A.I.
-              enabled products.
+              We don't just advise; we build and hand-off. We work alongside your team to transfer knowledge and build capabilities. Our goal is for you to have the skills to evaluate your AI systems, processes for continuous improvement, and the ability to select the best tools and frameworks—long after our engagement ends.
             </p>
           </div>
         </div>
@@ -235,50 +226,46 @@ export default ({ data }) => (
     </SectionWrapper>
     <SectionWrapper backgroundColor={colors.light}>
       <div>
-        <h1>Services</h1>
+        <h1>Services: AI Acceleration as a Service</h1>
         <IconsSection>
           <div>
-            <h4>Digital Strategy</h4>
+            <h4>Expert Architecture & System Design</h4>
             <HorizontalAccent />
             <Link to="/services#strategy">
               <StrategySVG />
             </Link>
             <div>
-              Custom analysis to expose major opportunities for value creation
-              and efficiency savings.
+              We specialize in architecting and deploying robust, production-grade solutions for agentic systems, advanced RAG pipelines, and evaluation & feedback frameworks. Stop wondering what best practices look like—we'll implement them for you.
             </div>
           </div>
           <div>
-            <h4>Data Science & ML</h4>
+            <h4>Advanced RAG & Agentic Systems</h4>
             <HorizontalAccent />
             <Link to="/services#machinelearning">
               <MachinelearningSVG />
             </Link>
             <div>
-              Build A.I. tools and products to drive organizational insights and
-              delight customers.
+              Moving beyond basic implementations to create sophisticated, reliable, and scalable Retrieval-Augmented Generation systems and autonomous agents with memory, tools, and complex orchestration. We turn LLMs into reliable, product-ready agents.
             </div>
           </div>
           <div>
-            <h4>Application Development</h4>
+            <h4>Evaluation-Driven Development</h4>
             <HorizontalAccent />
             <Link to="/services#development">
               <DevelopmentSVG />
             </Link>
             <div>
-              Full-stack engineering of beautiful, scalable, user-centric,
-              adaptable, and secure web and mobile apps.
+              We establish the critical infrastructure to measure, monitor, and continuously improve your generative models. This includes end-to-end evals, task-specific evals, and product-focused evals to ensure your LLMs work in practice.
             </div>
           </div>
           <div>
-            <h4>Training & Support</h4>
+            <h4>Empowerment and Hand-off</h4>
             <HorizontalAccent />
             <Link to="/services#support">
               <SupportSVG />
             </Link>
             <div>
-              Technology literacy training for executives and employees, as well
-              as ongoing support for your custom strategy or application.
+              Our goal is to make you successful. We document everything, establish best practices, and train your team to take ownership, ensuring long-term success long after our initial engagement ends.
             </div>
           </div>
         </IconsSection>
@@ -393,11 +380,6 @@ export const pageQuery = graphql`
       siteMetadata {
         shortName
         longName
-      }
-    }
-    topImage: imageSharp(id: { regex: "/network-3.png/" }) {
-      sizes(maxWidth: 1000, grayscale: false) {
-        ...GatsbyImageSharpSizes
       }
     }
   }

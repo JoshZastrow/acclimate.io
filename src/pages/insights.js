@@ -1,5 +1,6 @@
 import React from "react";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
+import { graphql } from "gatsby";
 import styled from "styled-components";
 
 import { colors } from "../styles/theme";
@@ -54,7 +55,7 @@ export default ({ data }) => (
 
 export const insightsQuery = graphql`
   query InsightsQuery {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       totalCount
       edges {
         node {
@@ -67,13 +68,14 @@ export const insightsQuery = graphql`
             description
             image {
               childImageSharp {
-                sizes(
-                  duotone: { highlight: "#E4EFF4", shadow: "#222220" }
-                  maxWidth: 600
-                  maxHeight: 400
-                ) {
-                  ...GatsbyImageSharpSizes
-                }
+                gatsbyImageData(
+                  layout: CONSTRAINED
+                  width: 600
+                  height: 400
+                  transformOptions: {
+                    duotone: { highlight: "#E4EFF4", shadow: "#222220" }
+                  }
+                )
               }
             }
           }

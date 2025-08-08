@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Img from "gatsby-image";
-import Link from "gatsby-link";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
 
 import { lighten } from "polished";
 import { colors } from "../../styles/theme";
@@ -52,15 +52,20 @@ const Separator = styled.span`
   color: ${colors.medium};
 `;
 
-export default props => (
-  <Container>
-    <Link to={props.insight.frontmatter.path}><Img sizes={props.insight.frontmatter.image.childImageSharp.sizes} /></Link>
-    <Title to={props.insight.frontmatter.path}>
-      <h2>{props.insight.frontmatter.title}</h2>
-      <span>&#8680;</span>
-    </Title>
-    <Date>{props.insight.frontmatter.date}</Date>
-    <Separator> – </Separator>
-    <Description>{props.insight.frontmatter.description}</Description>
-  </Container>
-);
+export default props => {
+  const image = getImage(props.insight.frontmatter.image);
+  return (
+    <Container>
+      <Link to={props.insight.frontmatter.path}>
+        <GatsbyImage image={image} alt={props.insight.frontmatter.title} />
+      </Link>
+      <Title to={props.insight.frontmatter.path}>
+        <h2>{props.insight.frontmatter.title}</h2>
+        <span>&#8680;</span>
+      </Title>
+      <Date>{props.insight.frontmatter.date}</Date>
+      <Separator> – </Separator>
+      <Description>{props.insight.frontmatter.description}</Description>
+    </Container>
+  );
+};

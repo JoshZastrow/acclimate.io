@@ -1,7 +1,8 @@
 import React from "react";
 import Helmet from "react-helmet";
+import { graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import Img from "gatsby-image";
 
 import { colors } from "../styles/theme";
 
@@ -12,18 +13,24 @@ import AlternatingSection from "../components/AlternatingSection";
 
 import TeamSVG from "../images/team.svg";
 
-const HorizontalAccentLeft = HorizontalAccent.extend`
+const HorizontalAccentLeft = styled(HorizontalAccent)`
   margin: 20px 0;
 `;
 
-const Portrait = styled(Img)`
-  border-radius: 50%;
+const Portrait = styled(GatsbyImage)`
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
 `;
 
-export default ({ data }) => (
+export default ({ data }) => {
+  const awImage = getImage(data.aw);
+  const jzImage = getImage(data.jz);
+
+  return (
   <div>
     <Helmet>
-      <title>Acclimate | Team</title>
+      <title>Acclimate | Partners</title>
     </Helmet>
     <PageHeader>
       <TeamSVG />
@@ -57,24 +64,7 @@ export default ({ data }) => (
         <h1>The partners</h1>
         <AlternatingSection>
           <div>
-            <Portrait sizes={data.zl.sizes} />
-          </div>
-          <div>
-            <h2>Zach Litif</h2>
-            <HorizontalAccentLeft />
-            <p>
-              A thinker, strategizer, and trailblazer, with a background in
-              intellectual property litigation, and a knack for capacity
-              building. From working with startup nonprofits to Fortune 100
-              companies, Zach analyzes the culture and organizational behavior
-              to tailor specific strategies for organizational effectiveness and
-              sustainable scaling.
-            </p>
-          </div>
-        </AlternatingSection>
-        <AlternatingSection>
-          <div>
-            <Portrait sizes={data.aw.sizes} />
+            <Portrait image={awImage} alt="Andrew Wilson" />
           </div>
           <div>
             <h2>Andrew Wilson</h2>
@@ -92,7 +82,7 @@ export default ({ data }) => (
         </AlternatingSection>
         <AlternatingSection>
           <div>
-            <Portrait sizes={data.jz.sizes} />
+            <Portrait image={jzImage} alt="Josh Zastrow" />
           </div>
           <div>
             <h2>Josh Zastrow</h2>
@@ -112,28 +102,19 @@ export default ({ data }) => (
       </div>
     </SectionWrapper>
   </div>
-);
+  );
+};
 
 export const pageQuery = graphql`
   query TeamQuery {
-    zl: imageSharp(id: { regex: "/zl.png/" }) {
-      sizes(maxWidth: 200) {
-        ...GatsbyImageSharpSizes
+    aw: file(relativePath: { eq: "images/avatars/aw.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
       }
     }
-    aw: imageSharp(id: { regex: "/aw.png/" }) {
-      sizes(maxWidth: 200) {
-        ...GatsbyImageSharpSizes
-      }
-    }
-    jz: imageSharp(id: { regex: "/jz.png/" }) {
-      sizes(maxWidth: 200) {
-        ...GatsbyImageSharpSizes
-      }
-    }
-    at: imageSharp(id: { regex: "/at.png/" }) {
-      sizes(maxWidth: 200) {
-        ...GatsbyImageSharpSizes
+    jz: file(relativePath: { eq: "images/avatars/jz.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
       }
     }
   }
